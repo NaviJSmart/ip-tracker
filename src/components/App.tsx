@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import bgImage from "../assets/pattern-bg.png";
+import Info from "./Info";
 import InputSearch from "./InputSearch";
 import Map from "./Map";
 
@@ -9,6 +10,7 @@ function App() {
       <UpperSection>
         <h1>IP Adress Tracker</h1>
         <InputSearch />
+        <Info />
       </UpperSection>
       <LowerSection>
         <Map />
@@ -20,6 +22,7 @@ function App() {
 export default App;
 
 const UpperSection = styled.div`
+  padding: 0 30px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -34,6 +37,11 @@ const UpperSection = styled.div`
   h1 {
     padding: 25px 0;
     color: #ffffff;
+    @media screen and (max-width: 900px) {
+    font-size: 24px;
+    font-weight: 400;
+    padding: 15px 0;
+  }
   }
 `;
 
