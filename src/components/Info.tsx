@@ -1,41 +1,75 @@
+import { IGeoAPI } from "../types/GeoTypes";
+import { ReactComponent as Infinity } from "../assets/Infinity.svg";
 import styled from "styled-components";
 
-interface Ititle {
-  title: string;
-}
+type TInfoProps = {
+  info: IGeoAPI | null;
+  isError: {
+    code: number;
+    messages: string;
+  } | null;
+  isLoading: boolean;
+};
 
-const arr = ["ip adress", "location", "timezone", "isp"];
+const Info = ({ info, isError, isLoading }: TInfoProps) => {
+  console.log(isLoading);
+  const ErrorHappend = isError ? <div>{isError.messages}</div> : null;
 
-const Info = () => {
   return (
     <Wrapper>
-      {arr.map((item: string) => (
-        <DisplayInfo title={item} />
-      ))}
+      {isError ? (
+        ErrorHappend
+      ) : (
+        <>
+          <div className="content">
+            <h4>ip adress</h4>
+            {isLoading ? <Infinity /> : <p>{info?.ip}</p>}
+          </div>
+          <div className="content">
+            <h4>location</h4>
+            {isLoading ? (
+              <Infinity />
+            ) : (
+              <p>
+                {info?.location.country}, {info?.location.city}
+              </p>
+            )}
+          </div>
+          <div className="content">
+            <h4>timezone</h4>
+            {isLoading ? <Infinity /> : <p>{info?.location.timezone}</p>}
+          </div>
+          <div className="content">
+            <h4>isp</h4>
+            {isLoading ? <Infinity /> : <p>{info?.isp}</p>}
+          </div>
+        </>
+      )}
     </Wrapper>
   );
 };
 export default Info;
-
-const DisplayInfo = ({ title }: Ititle) => {
-  return (
-    <div className="content">
-      <h4>{title}</h4>
-      <p>SpacX Starlik</p>
-    </div>
-  );
-};
 
 const Wrapper = styled.div`
   background-color: #ffffff;
   border-radius: 15px;
   display: flex;
   padding: 30px;
+  box-shadow: 0px 5px 19px -10px rgba(0, 0, 0, 0.75);
   .content {
-    width: 200px;
-    padding: 0 10px;
+    
+    width: 100%;
+    padding: 0 20px 0 10px;
     min-height: 100%;
-
+    svg {
+      background: transparent;
+      height: 100px;
+      margin-left: -10px;
+      @media screen and (max-width: 900px) {
+        margin: -15px;
+        height: 70px;
+      }
+    }
     h4 {
       text-transform: uppercase;
       font-size: 14px;
@@ -50,7 +84,7 @@ const Wrapper = styled.div`
       letter-spacing: 1px;
     }
   }
- 
+
   @media screen and (max-width: 900px) {
     flex-direction: column;
     padding: 15px 30px;
@@ -66,7 +100,6 @@ const Wrapper = styled.div`
         letter-spacing: 1px;
         padding-top: 5px;
         font-size: 18px;
-     
       }
     }
   }

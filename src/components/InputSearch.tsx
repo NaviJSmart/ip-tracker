@@ -1,23 +1,31 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../assets/arrow.svg";
-const InputSearch = () => {
+
+
+type TSubmitProp = {
+  submitParam: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const InputSearch = ({ submitParam }: TSubmitProp): JSX.Element => {
   const [term, setTerm] = useState("");
-  console.log(term);
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
   };
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    submitParam(term)
     setTerm("");
   };
+
   return (
     <InputWrapper>
       <form onSubmit={onSubmitHandler}>
         <div className="input_search">
           <InputUI
             type="text"
-            placeholder="Search for any IP adress or domain "
+            placeholder="Search for any IP adress or domain"
             onChange={onChangeHandler}
             value={term}
           />
@@ -38,9 +46,9 @@ const InputWrapper = styled.div`
     align-items: center;
     padding-bottom: 40px;
     @media screen and (max-width: 900px) {
-    padding-bottom: 15px;
+      padding-bottom: 15px;
+    }
   }
-}
 `;
 
 const InputUI = styled.input`
@@ -52,13 +60,12 @@ const InputUI = styled.input`
   border-bottom-left-radius: 15px;
   cursor: pointer;
   &::placeholder {
-      font-size: 16px;
-    }
+    font-size: 16px;
+  }
   @media screen and (max-width: 900px) {
     &::placeholder {
       font-size: 14px;
     }
-   
   }
 `;
 
