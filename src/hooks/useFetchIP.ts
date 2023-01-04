@@ -25,11 +25,7 @@ const useFetchIP = (param: string = "") => {
         setLoading(false);
       } catch (e: any) {
       setLoading(false)
-    //   if (typeof e === "string") {
-    //     setIsError(e.toUpperCase())
-    // } else if (e instanceof Error) {
-    //     setIsError(e.message) 
-    console.error(e, 'my error');
+    
     if(typeof e.text === 'function' ) {
       e.text().then((someError: any) => setIsError(JSON.parse(someError)))
 

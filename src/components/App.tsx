@@ -36,7 +36,7 @@ const UpperSection = styled.div`
   background: url(${bgImage});
   background-size: cover;
   height: 35vh;
-  box-shadow: 0px 5px 19px -3px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 19px -3px rgba(218, 160, 160, 0.75);
   z-index: 1000;
 
   h1 {
